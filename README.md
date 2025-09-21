@@ -144,4 +144,128 @@ http://localhost:9090
 
 
 
+  
+
+  (Windows: dir)
+* This will show files like pom.xml, src/, etc.
+
+---
+
+### *2. mvn CLEAN package, but getting unknown lifecycle phase error – 2M*
+
+If you typed:
+
+bash
+mvn CLEAN package
+
+
+it fails ❌ because Maven is *case-sensitive*.
+✅ Correct command:
+
+bash
+mvn clean package
+
+
+(clean must be lowercase)
+
+---
+
+### *3. Add dependency servlet-api of 2.5 to your project – 2M*
+
+In pom.xml, inside <dependencies>:
+
+xml
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>servlet-api</artifactId>
+    <version>2.5</version>
+    <scope>provided</scope>
+</dependency>
+
+
+(scope=provided means container like Tomcat provides it.)
+
+---
+
+### *4. Build with JDK 21, but compilation fails – Why? How to fix? – 2M*
+
+* Problem: Project may use *old libraries not compatible with JDK 21*.
+* Fix: Add *maven-compiler-plugin* with Java version in pom.xml.
+
+xml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.8.1</version>
+      <configuration>
+        <source>17</source>
+        <target>17</target>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+
+
+👉 Set 17 (or supported version).
+
+---
+
+### *5. In dependency section: junit 4.6.0 – What will Maven do? How to solve? – 2M*
+
+xml
+<dependency>
+  <groupId>SE</groupId>
+  <artifactId>junit</artifactId>
+  <version>4.6.0</version>
+</dependency>
+
+
+❌ Issue: Wrong groupId (SE is invalid).
+✅ Correct dependency:
+
+xml
+<dependency>
+  <groupId>junit</groupId>
+  <artifactId>junit</artifactId>
+  <version>4.6.0</version>
+  <scope>test</scope>
+</dependency>
+
+
+---
+
+### *6. WAR file name mismatch – 3M*
+
+* You built the project → WAR file generated as:
+  hospitalmgmtsystem-0.0.1-SNAPSHOT.war
+* But expected: HospitalMgmtSystem.war.
+
+✅ Fix in pom.xml:
+
+xml
+<build>
+  <finalName>HospitalMgmtSystem</finalName>
+</build>
+
+
+Now output will be: HospitalMgmtSystem.war.
+
+---
+
+✔ That covers *Q2 fully (30M)*.
+
+---
+
+Do you want me to continue with *Q3: Git & GitHub Integration with Maven Project (30M)* next?
+
+
+
+
+
+
+
+
+
 
