@@ -92,6 +92,14 @@ COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
 EXPOSE 8080
 CMD ["catalina.sh","run"]
 
+**push into docker hub:**
+
+docker login
+docker tag myappimage yourusername/myappimage:1.0
+docker push yourusername/myappimage:1.0
+docker pull yourusername/myappimage:1.0   # optional, on another machine
+docker run -d -p 8080:8080 yourusername/myappimage:1.0
+
 **Docker image:**
 version: "3.9"
 services:
